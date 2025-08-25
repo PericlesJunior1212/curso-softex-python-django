@@ -1,5 +1,5 @@
-hamb = 30
-cupom_desc= 10
+hamb = 30.00
+cupom_desc=  "10"
 
 while True:
     produto = input("Me diga seu pedido: ")
@@ -12,7 +12,7 @@ while True:
         
 cupom = input("Você possui cupom de desconto? (s/n) ")
 if cupom == "s":
-        print(f"Valor com desconto: R$ {hamb - cupom_desc}")
+        print(f"Valor com desconto: R$ {hamb *0.9}")
 else:
         print(f"Valor sem desconto: R$ {hamb}")
 print("Volte sempre!")
