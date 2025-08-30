@@ -26,7 +26,7 @@ while True:
             print("Os valores não formam um triângulo .")
             continue
     
-        print("Os valores formam um triângulo.")
+        print("Os valores formam um triângulo.") 
         break
  
   
