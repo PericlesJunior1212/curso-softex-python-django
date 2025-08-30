@@ -6,7 +6,7 @@ while True:
   lado_C = input("Digite o valor do lado C: ")
   
   lado_A = int(lado_A)
-  lado_B = int(lado_B)
+  lado_B = int(lado_B) 
   lado_C = int(lado_C)
 
   if lado_A <= 0 or lado_B <= 0 or lado_C <= 0:
