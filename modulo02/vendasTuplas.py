@@ -8,7 +8,8 @@ for nome_produto, valor, qtd in vendas:
     produtos_unicos.add(nome_produto)
      
     
-print(f"As vendas maiores que 100  sao: {vendas_filtradas}")    
+print(f"\nAs vendas maiores que 100  sao: {vendas_filtradas}")    
 print(f"\nSó os produtos, separados: {produtos_unicos}")
+print("\n")
 
       
