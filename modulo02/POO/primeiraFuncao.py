@@ -32,5 +32,5 @@
     #return None
 #print(encontrar_par ([1, 3, 5, 6, 8]))
 
-dobrar = lambda x: x * 2
-print(dobrar (5))
+#dobrar = lambda x: x * 2
+#print(dobrar (5))
