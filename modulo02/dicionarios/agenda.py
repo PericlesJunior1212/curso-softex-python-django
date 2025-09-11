@@ -19,8 +19,11 @@ while True:
        print("Apenas número.")
      
     if escolha == 2:
-       buscar =input("Qual contato desejar buscar")
+       buscar =input("Qual contato desejar buscar: ")
        buscar in agenda
-       print(f"O número encontrado {agenda[buscar]}")
+       print(f"O número encontrado: {agenda[buscar]}")
+    if escolha == 3:
+        print("Saindo...")
+        break
     
     
