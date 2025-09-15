@@ -27,4 +27,7 @@ def main():
         print("A frase é um palíndromo.")
     else:
         print("A frase não é um palíndromo.")
+if __name__ == "__main__":
+    main()
+    
         
