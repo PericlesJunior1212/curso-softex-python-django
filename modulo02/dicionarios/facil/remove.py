@@ -6,3 +6,4 @@ if remove in produtos:
 nova_lista = produtos.items()
 print(nova_lista)
     
+                                                                
