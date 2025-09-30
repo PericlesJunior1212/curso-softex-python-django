@@ -4,11 +4,10 @@ class Comodo:
 
 class Casa:
     def __init__(self,list_comodo:list[Comodo]):
-       self.comodos = list_comodo
+     self.comodos = list_comodo
     
     def adicionar_comodo(self,nome_com: Comodo):
         self.comodos.append(nome_com)
-     
 
     def listar_comodos(self):
         for comodo in self.comodos:
