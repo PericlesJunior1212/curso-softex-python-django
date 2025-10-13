@@ -11,7 +11,7 @@ class UserModel:
         self._create_table()
 
     def _create_table(self):
-        """Método privado para criar a tabela de usuários."""
+        """Método privado parausuários criar a tabela de ."""
         self.db_conn.connect()
         self.db_conn.cursor.execute(
             """
