@@ -1,3 +1,5 @@
+-- Active: 1759941948462@@127.0.0.1@3306
+-- Active: 1759941948462@@127.0.0.1@3306
 CREATE TABLE usuarios (
     id integer primary key,
     primeiro_nome text not null,
