@@ -18,7 +18,7 @@ class StudentModel:
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 nome TEXT NOT NULL,
                 email TEXT NOT NULL UNIQUE,
-                id_address INTEGER,
+                id_address INTEGER NOT NULL,
                 FOREIGN KEY (id_address) REFERENCES enderecos(id_address)
             );
         """

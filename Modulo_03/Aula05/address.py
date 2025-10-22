@@ -17,6 +17,7 @@ class AddressModel:
             CREATE TABLE IF NOT EXISTS enderecos (
                 id_address INTEGER PRIMARY KEY AUTOINCREMENT,
                 endereco TEXT NOT NULL UNIQUE
+                
             );
             """
         )

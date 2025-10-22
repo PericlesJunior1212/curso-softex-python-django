@@ -2,14 +2,14 @@ from database import DatabaseConnection
 from student_model import StudentModel
 from course_model import CourseModel
 from enrollment_model import EnrollmentModel
+from address import AddressModel
 
 # Inicializa as conexões e modelos globalmente
 db_conn = DatabaseConnection("escola.db")
 student_model = StudentModel(db_conn)
 course_model = CourseModel(db_conn)
 enrollment_model = EnrollmentModel(db_conn)
-
-
+address = AddressModel(db_conn)
 def display_menu():
     """Exibe o menu principal de opções do sistema escolar."""
     print("\n==================================")
@@ -18,7 +18,9 @@ def display_menu():
     print("1. Gerenciar Alunos (CRUD)")
     print("2. Gerenciar Cursos (CRUD)")
     print("3. Gerenciar Matrículas (N:N)")
-    print("4. Sair")
+    print("4. Gerenciar Endereços (CRUD)")
+    print("5. Sair")
+    print("----------------------------------")
     print("----------------------------------")
 
 
@@ -190,6 +192,27 @@ def handle_enrollment_management():
 
         else:
             print("Opção inválida. Tente novamente.")
+def handle_address_management():
+    """Lida com as operações de Endereços."""
+    options = {
+        "1": "Adicionar endereços ao aluno",
+        "2": "Ver endereço de um aluno",
+    }
+    while True:
+        display_submenu("Gerenciar Endereços", options)
+        choice = input("Escolha uma opção: ").upper()
+
+        if choice == "1":
+            print("\n--- Cadastro de Endereços ---")
+            endereco = input("Endereço: ")
+            address.address_student(endereco)
+
+        elif choice == "V":
+            break
+
+        else:
+            print("Opção inválida. Tente novamente.")
+       
 
 
 def main():
@@ -206,8 +229,11 @@ def main():
 
         elif choice == "3":
             handle_enrollment_management()
-
+        
         elif choice == "4":
+            handle_address_management()
+
+        elif choice == "5":
             print("Saindo do programa. Até logo!")
             break
 
