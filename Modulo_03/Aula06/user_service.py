@@ -1,4 +1,3 @@
-# user_service.py
 from user_model import UserModel
 from hasher import hash_senha, verificar_senha
 
@@ -9,6 +8,7 @@ class UserService:
         """
         crie um atributo que receberá a UserModel como composição
         """
+        self.user_model = UserModel()    
 
     def _safe_user_data(self, user) -> dict | None:
         """
@@ -17,6 +17,18 @@ class UserService:
         caso ele ão exista retorne None
         """
 
+        if user:
+            return {
+                'id': user['id'],
+                'nome_completoi': user['nome_completo'],
+                'perfil_acesso': user['perfil_acesso'],
+                'data_criacao': user['data_criacao'],
+                'data_atualizacao': user['data_atualizacao'],
+            }
+            
+        else:
+            return None
+       
     def _is_authorized(
         self,
         current_user_id: int | None,
@@ -30,6 +42,16 @@ class UserService:
         Se  action == "edit_self" retorne current_user_id == target_user_id
         No geral retorn false
         """
+        if current_user_profile == "Diretoria":
+            return True
+
+        if not target_user_id:
+            return False
+
+        if action == "edit_self":
+            return current_user_id == target_user_id
+
+        return False
 
     def register_user(
         self,
@@ -46,6 +68,21 @@ class UserService:
         Caso os campos atendas as requisições, faça o hash da senha e salve use o método create_user da User Model
         """
 
+        if len(senha) < 8:
+            return False, "A senha deve conter no mínimo 8  caracteres."
+
+        if len(email) < 10 or "@" not in email or not email.endswith(".com"):
+            return False, "Email inválido."
+        
+        if not nome_completo.isalpha() or not nome_completo.strip(): 
+            return False, "Erro nome inválido"
+
+        senha_hash = hash_senha(senha)
+        return self.user_model.create_user(senha_hash,email,nome_completo,perfil)
+        
+            
+        
+
     def login_user(self, email: str, senha: str) -> tuple[dict | None, str]:
         """
         Este método é o login do usuários, deve receber um email e senha não vazios
@@ -54,7 +91,9 @@ class UserService:
         Use a função verificar_senha, se tiver ok, retorn o usuarios pelo método privado _safe_user_data
         e a mensagem Login bem-sucedido!.
         Caso contrario retorne None e a mensagem de erro
+
         """
+        
 
     def update_user_profile(
         self,
