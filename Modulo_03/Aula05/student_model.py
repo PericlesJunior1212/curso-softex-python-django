@@ -17,9 +17,9 @@ class StudentModel:
             CREATE TABLE IF NOT EXISTS alunos (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 nome TEXT NOT NULL,
-                email TEXT NOT NULL UNIQUE
-                id address GetInteger(,
-                FOREING KEY (id address) REFERENCES address(id))
+                email TEXT NOT NULL UNIQUE,
+                id_address INTEGER,
+                FOREIGN KEY (id_address) REFERENCES enderecos(id_address)
             );
         """
         )
