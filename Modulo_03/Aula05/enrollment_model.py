@@ -50,12 +50,23 @@ class EnrollmentModel:
             self.db_conn.close()
 
     def get_courses_by_student(self, id_aluno):
-       
-        
+        """Busca todos os cursos em que um aluno específico está matriculado.
+        (Consulta N:N - Aluno -> Cursos)     
+        """
+        self.db_conn.connect()
+        self.db_conn.cursor.execute(
+            """
+            SELECT c.id, c.nome, c.descricao, m.data_matricula
+            FROM cursos c
+            INNER JOIN matriculas m ON c.id = m.id_curso
+            WHERE m.id_aluno = ?;
+            """,
+            (id_aluno,),
+        ) 
         courses = self.db_conn.cursor.fetchall()
         self.db_conn.close()
         return courses
-
+        
     def get_students_by_course(self, id_curso):
         """Busca todos os alunos matriculados em um curso específico.
         (Consulta N:N - Curso -> Alunos)

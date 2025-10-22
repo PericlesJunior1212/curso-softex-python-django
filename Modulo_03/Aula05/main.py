@@ -192,6 +192,7 @@ def handle_enrollment_management():
 
         else:
             print("Opção inválida. Tente novamente.")
+
 def handle_address_management():
     """Lida com as operações de Endereços."""
     options = {
@@ -212,7 +213,7 @@ def handle_address_management():
 
         else:
             print("Opção inválida. Tente novamente.")
-       
+
 
 
 def main():
