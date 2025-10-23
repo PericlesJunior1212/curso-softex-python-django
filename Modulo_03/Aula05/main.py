@@ -204,9 +204,25 @@ def handle_address_management():
         choice = input("Escolha uma opção: ").upper()
 
         if choice == "1":
-            print("\n--- Cadastro de Endereços ---")
-            endereco = input("Endereço: ")
-            address.address_student(endereco)
+            print("\n--- Adicionar Endereço ---")
+            endereco = input("Digite o endereço: ")
+            address.create_address(endereco)
+        
+        elif choice == "2":
+            print("\n--- Ver Endereço do Aluno ---")
+            try:
+                id_address = int(input("Digite o ID do Endereço: "))
+                students = address.get_students_by_address(id_address)
+                if students:
+                    print(f"\nAlunos associados ao Endereço ID {id_address}:")
+                    for student in students:
+                        print(
+                            f"ID: {student['id']} | Nome: {student['nome']} | E-mail: {student['email']}"
+                        )
+                else:
+                    print(f"Nenhum aluno associado ao Endereço ID {id_address}.")
+            except ValueError:
+                print("ID inválido.")
 
         elif choice == "V":
             break

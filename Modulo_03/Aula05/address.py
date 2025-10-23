@@ -50,3 +50,8 @@ class AddressModel:
         students = self.db_conn.cursor.fetchall()
         self.db_conn.close()
         return students
+
+    # Compatibilidade retroativa: alguns códigos podem chamar `address_student`
+    # mantemos esse alias para evitar AttributeError e direcionamos para o novo método.
+    def address_student(self, id_address):
+        return self.get_students_by_address(id_address)
