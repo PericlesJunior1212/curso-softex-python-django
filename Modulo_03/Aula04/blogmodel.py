@@ -3,7 +3,7 @@ from datetime import datetime
 from database import DatabaseConnection
 
 class BlogModel:
-  
+    """Gerencia a tabela 'POST' e todas as operações de CRUD."""
 
     def __init__(self):
         self.db_conn = DatabaseConnection()
@@ -14,7 +14,7 @@ class BlogModel:
         self.db_conn.connect()
         self.db_conn.cursor.execute(
             """
-              CREATE TABLE IF NOT EXISTS usuarios (
+            CREATE TABLE IF NOT EXISTS usuarios (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 titulo TEXT NOT NULL,
                 conteudo TEXT NOT NULL UNIQUE,
@@ -45,4 +45,4 @@ class BlogModel:
         except sqlite3.IntegrityError:
             print(f"Erro: A postagem '{titulo}' já está em uso.")
         finally:    
-        
+            self.db_conn.close()
