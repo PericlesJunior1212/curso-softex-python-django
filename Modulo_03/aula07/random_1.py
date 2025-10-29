@@ -26,17 +26,15 @@ def encontrar_intersecao(lista1, lista2):
 # --- Exemplo de uso ---
 
 # Gera duas listas de números inteiros aleatórios
-tamanho_lista1 = 15
-tamanho_lista2 = 18
-lista_aleatoria1 = [random.randint(1, 20) for _ in range(tamanho_lista1)]
-lista_aleatoria2 = [random.randint(1, 20) for _ in range(tamanho_lista2)]
+tamanho_lista1 = []
+tamanho_lista2 = []
 
-# Imprime as listas geradas
-print(f"Lista 1: {lista_aleatoria1}")
-print(f"Lista 2: {lista_aleatoria2}")
 
-# Chama a função para encontrar a interseção
-elementos_comuns = encontrar_intersecao(lista_aleatoria1, lista_aleatoria2)
+lista1 = []
+lista2 = []
 
-# Imprime o resultado
-print(f"Elementos em comum (sem repetição): {elementos_comuns}")
+for _ in range(3):
+    lista1.append(random.randint(1, 5))
+    lista2.append(random.randint(1, 5))
+
+print(encontrar_intersecao(lista1, lista2))

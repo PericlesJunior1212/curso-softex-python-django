@@ -1,7 +1,8 @@
 # test_funcoes.py (Parte 2)
 from funcoes import processar_lista, buscar_usuario
 
-def test_processar_lista_ordenacao():
+def test_processar_lista_ordenacao():# ativar no PowerShell (dot-source)
+. .\.venv\Scripts\Activate.ps1
     lista_desordenada = [3, 1, 2, 4]
     lista_esperada = [1, 2, 3, 4]
     
