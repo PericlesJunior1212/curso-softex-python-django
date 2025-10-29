@@ -1,8 +1,24 @@
-def somar_lista(lista_2, lista_1):
-   
-   resultado = []
+def somar_listas(lista1, lista2):
+  
+ 
+  if len(lista1) > len(lista2):
+    lista_maior = lista1
+    lista_menor = lista2
+  else:
+    lista_maior = lista2
+    lista_menor = lista1
+    
+  resultado = []
+  
+  for i in range(len(lista_maior)):
+    try:
+      
+      soma = lista_maior[i] + lista_menor[i]
+      resultado.append(soma)
+    except IndexError:
 
-if len(lista_1) >= len(lista_2):
-   
-   lista_maior = lista_1
-   lista_menor = lista_2
+      resultado.append(lista_maior[i])
+      
+  return resultado
+
+print(somar_listas(lista1, lista2))
