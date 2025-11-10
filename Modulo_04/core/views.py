@@ -1,21 +1,18 @@
 from django.shortcuts import render
 from .models import Tarefa
 # Create your views here.
+
 def home(request):
+    todas_as_tarefas = Tarefa.objects.all()
     context = {
         'nome_usuario': 'Júnior',
-        'tecnologias': ['Python', 'Django', 'HTML', 'CSS'],
+        'tecnologias': ['Python', 'Django', 'Models', 'Admin'],
+        'tarefas': todas_as_tarefas
     }
-    # return HttpResponse("<h1>Olá, Mundo! Esta é minha primeira página Django!</h1>")
     return render(request, 'home.html', context)
 
-def home(request):
-
-    todas_as_tarefas = Tarefa.objects.all()
-# 3. Atualize o contexto
+def segundo(request):
     context = {
-    'nome_usuario': 'Júnior',
-    'tecnologias': ['Python', 'Django', 'Models', 'Admin'],
-    'tarefas': todas_as_tarefas # 4. Adicione as tarefas ao contexto
+        'mensagem': 'Esta é a página segunda',
     }
-    return render(request, 'home.html', context)
+    return render(request, 'base.html', context)

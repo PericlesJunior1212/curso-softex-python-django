@@ -14,11 +14,9 @@
     {% if nome_usuario == 'Júnior' %}
         <p>Este é um conteúdo especial para o Júnior!</p>
     {% endif %}
-{% endblock %
-    {% block content %}
-    <h1>Olá, {{ nome_usuario }}!</h1>
-...     (seu código antigo) ...
-    <hr> <h2>Minha Lista de Tarefas (do Banco de Dados):</h2>
+    
+    <hr>
+    <h2>Minha Lista de Tarefas (do Banco de Dados):</h2>
     <ul>
         {% for tarefa in tarefas %}
             <li>
