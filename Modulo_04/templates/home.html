@@ -28,7 +28,7 @@ Página Inicial - Meu Site
         {% if tarefa.concluida %}
             <strong style="color: green;">(✓ Concluída)</strong>
         {% else %}
-             <strong style="color: orange;">(☐ Pendente)</strong>
+            <strong style="color: orange;">(☐ Pendente)</strong>
         {% endif %}
         <br>
         <small>Criada em: {{ tarefa.criada_em|date:"d/m/Y H:i" }}</small>
@@ -39,14 +39,13 @@ Página Inicial - Meu Site
                 <button type="submit">Deletar</button>
             </form>
             {% if not tarefa.concluida %}
-                 <form action="{% url 'concluir_tarefa' tarefa.pk %}" method="POST" style="display:
-inline;">
-                 {% csrf_token %}
-                 <button type="submit">Marcar com Concluída<button>
+                <form action="{% url 'concluir_tarefa' tarefa.pk %}" method="POST" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit">Marcar com Concluída<button>
                 </form>
             {% endif %}
         </div>
-      </li>
+    </li>
     {% empty %}
         <li>Você ainda não tem tarefas cadastradas.</li>
     {% endfor %}
