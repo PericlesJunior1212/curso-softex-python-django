@@ -1,15 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
+from projects.models import Project
+
 class Tarefa(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     
-    
-    # 2. ADICIONE A NOVA RELAÇÃO
-    # Cada Tarefa agora DEVE estar ligada a um Projeto.
-    # Usamos uma referência por string para evitar import circular entre apps
-    # formato: 'app_label.ModelName'
-    projects = models.ForeignKey('projects.Project', on_delete=models.CASCADE, related_name='tarefas')
+
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='tarefas')
+
 
     titulo = models.CharField(max_length=200)
 
