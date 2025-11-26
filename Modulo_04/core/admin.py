@@ -6,18 +6,18 @@ class TarefaAdmin(admin.ModelAdmin):
 
     # 'list_display' é uma tupla com os nomes dos campos
     # que queremos exibir como colunas na lista
-    list_display = ('titulo', 'user', 'get_user_email', 'concluida', 'criada_em')
-    list_filter = ('concluida', 'user', 'criada_em')
-    search_fields = ('titulo', 'user__username')
+    list_display = ('titulo', 'user', 'get_user_email', 'concluida', 'criada_em', 'project')
+    list_filter = ('concluida', 'user', 'criada_em', 'project')
+    search_fields = ('titulo', 'user__username', 'project')
     
     
     fieldsets = (
-         ('Informações Principais', {
-        'fields': ('user', 'titulo')
-         }),
-         ('Status da Tarefa', {
-         'fields': ('concluida', 'criada_em')
-         }),
+        ('Informações Principais', {
+        'fields': ('user', 'titulo', 'project')
+        }),
+        ('Status da Tarefa', {
+        'fields': ('concluida', 'criada_em')
+        }),
 )
     
     readonly_fields = ('criada_em',)
