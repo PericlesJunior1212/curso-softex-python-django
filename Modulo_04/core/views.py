@@ -35,12 +35,12 @@ def home(request):
         'tecnologias': ['Autenticação', 'ForeignKey', 'Login'],
         'tarefas': todas_as_tarefas,
         'form': form,
- }
+}
     return render(request, 'home.html', context)
 
 @login_required
 def concluir_tarefa(request, pk):
-     # 2. Modifique o 'get_object_or_404'
+    # 2. Modifique o 'get_object_or_404'
     # Busque a Tarefa pela 'pk' E ONDE o 'user' é o 'request.user'
     tarefa = get_object_or_404(Tarefa, pk=pk, user=request.user)
     if request.method == 'POST':
@@ -75,7 +75,7 @@ def register(request):
             return redirect('home') # Redireciona para a home
     # Se a requisição for GET, o usuário apenas visitou a página
     else:
-     form = UserCreationForm() # Cria um formulário de cadastro vazio
+        form = UserCreationForm() # Cria um formulário de cadastro vazio
 
     # Prepara o contexto e renderiza o template
     context = {'form': form}

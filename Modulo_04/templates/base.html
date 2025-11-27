@@ -1,48 +1,51 @@
-+{% load static %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}
-      Meu Site Django
-      {% endblock %}
-    </title> <link rel="stylesheet" href="{%static 'css/style.css' %}">
-  
+    <title>
+        {% block title %}Meu Site Django{% endblock %}
+    </title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
-    <nav>
-        <a href="{% url 'home' %}">Home</a> |
-        {% if user.is_authenticated %}
-        <span>Olá, {{ user.username }}!</span> |
+    <header>
+        <nav class="container">
+            <a href="{% url 'home' %}" class="logo">
+                TaskFlow
+            </a>
+            <div class="nav-links">
+                <a href="{% url 'home' %}">Home</a>
+                {% if user.is_authenticated %}
+                    <div class="user-menu">
+                        <span class="user-greeting">👋 Olá, {{ user.username }}!</span>
+                        <form action="{% url 'logout' %}" method="POST">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline btn-sm">🚪 Sair</button>
+                        </form>
+                    </div>
+                {% else %}
+                    <div class="user-menu">
+                        <a href="{% url 'login' %}" class="btn btn-outline btn-sm">🔑 Entrar</a>
+                        <a href="{% url 'register' %}" class="btn btn-primary btn-sm">✨ Cadastre-se</a>
+                    </div>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
 
-        <form action="{% url 'logout' %}" method="POST" style="display: inline;">
-          {% csrf_token %}
-          <button type="submit" style="background:none; border:none;padding:0; color:blue; text-decoration:underline; cursor:pointer;">
- 
- 
-            Sair (Logout)
-          </button>
-        </form>
-        {% else %}
-          <a href="{% url 'login' %}">Entrar (Login)</a> |
-          <a href="{% url 'register' %}">Cadastre-se</a>
-       {% endif %}
-      </nav>
-   </header>
-    </nav>
-   </header>
-   
-   <main>
-          
+    <main class="container">
         {% block content %}
         {% endblock %}
-   </main>
-   
-   <footer>
-        <p>© 2025 - Meu Site Incrível</p>
-   </footer>
+    </main>
 
+    <footer>
+        <div class="container footer-content">
+            <p>© 2025 - TaskFlow - Organize sua vida</p>
+            <p>Feito com ❤️ e Django</p>
+        </div>
+    </footer>
 </body>
 </html>

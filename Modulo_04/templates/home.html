@@ -1,63 +1,113 @@
 {% extends 'base.html' %}
-{% block title %}
-    Página Inicial - Meu Site
-{% endblock %}
+{% block title %}Página Inicial - TaskFlow{% endblock %}
 {% block content %}
-    <h1>Olá, {{ nome_usuario }}!</h1>
-    <hr />
-    <h3>Nova Tarefa:</h3>
-    <form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Adicionar Tarefa</button>
-    </form>
-    <hr />
-    <p>Este HTML está separado do meu código Python.</p>
-    <h3>Tecnologias que estou aprendendo:</h3>
-    {% if nome_usuario == 'Júnior' %}
-    <p>Este é um conteúdo especial para o Júnior!</p>
-    {% endif %}
+<div class="animate-in">
+    <!-- Hero Section -->
+    <div class="hero-section card">
+        <h1 class="page-title">🎯 Bem-vindo ao TaskFlow!</h1>
+        <p class="text-center mb-0">Organize suas tarefas de forma simples e eficiente</p>
+    </div>
 
-    <hr />
-    <h2>Minha Lista de Tarefas (do Banco de Dados):</h2>
-    <ul style="list-style: none; padding: 0;">
-    {% for tarefa in tarefas %}
-        <li style="margin-bottom: 15px; border: 1px solid #ccc; padding: 10px;">
-        
-        <small style="font-weight: bold; color: #555;">Projeto: {{ tarefa.project.titulo }}</small>
-        <br />
-
-        {{ tarefa.titulo }}
-        {% if tarefa.concluida %}
-            <strong style="color: green;">(✔ Concluída)</strong>
-        {% else %}
-            <strong style="color: orange;">(☐ Pendente)</strong>
-        {% endif %}
-        <br />
-        <small>Criada em: {{ tarefa.criada_em|date:'d/m/Y H:i' }}</small> <div style="margin-top:
-10px;">
-            <form action="{% url 'deletar_tarefa' tarefa.pk %}" method="POST" style="display: inline;">
-            {% csrf_token %}
-            <button type="submit">Deletar</button>
-            </form>
-            {% if not tarefa.concluida %}
-            <form action="{% url 'concluir_tarefa' tarefa.pk %}" method="POST" style="display:
-inline;">
-                {% csrf_token %}
-                <button type="submit">Marcar como Concluída</button>
-            </form>
-            {% endif %}
-            {% if tarefa.concluida %}
-                <form action="{% url 'concluir_tarefa' tarefa.pk %}" method="POST" style="display:
-inline;">
-            {% csrf_token %}
-                <button type="submit">Marcar como Pendente</button>
-            </form>
-            {% endif %}
+    <!-- Formulário de Nova Tarefa -->
+    <div class="card animate-in">
+        <div class="card-header">
+            <h2 class="section-title">📝 Nova Tarefa</h2>
         </div>
-    </li>
-    {% empty %}
-        <li>Você ainda não tem tarefas cadastradas.</li>
-    {% endfor %}
-    </ul>
+        <form method="POST" class="form-group">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}" class="form-label">
+                    {{ field.label }}
+                </label>
+                {{ field }}
+                {% if field.help_text %}
+                <small class="form-text">{{ field.help_text }}</small>
+                {% endif %}
+                {% for error in field.errors %}
+                <div class="alert alert-error">{{ error }}</div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">
+                ➕ Adicionar Tarefa
+            </button>
+        </form>
+    </div>
+
+    <!-- Conteúdo Personalizado -->
+    <div class="card animate-in">
+        <h3 class="section-title">🚀 Tecnologias que estou aprendendo:</h3>
+        <p>Django, Python, HTML, CSS e muito mais!</p>
+        
+        {% if user.username == 'Júnior' %}
+        <div class="alert alert-success mt-2">
+            🎉 Este é um conteúdo especial para o Júnior!
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Lista de Tarefas -->
+    <div class="card animate-in">
+        <div class="card-header">
+            <h2 class="section-title">📋 Minha Lista de Tarefas</h2>
+            <span class="status-badge {% if tarefas %}status-pending{% else %}status-completed{% endif %}">
+                {{ tarefas|length }} tarefa{{ tarefas|length|pluralize }}
+            </span>
+        </div>
+
+        {% if tarefas %}
+        <div class="tasks-grid">
+            {% for tarefa in tarefas %}
+            <div class="task-card animate-in">
+                <div class="task-header">
+                    <div>
+                        <h3 class="task-title">{{ tarefa.titulo }}</h3>
+                        <span class="task-project">📂 {{ tarefa.project.titulo }}</span>
+                    </div>
+                    <span class="status-badge {% if tarefa.concluida %}status-completed{% else %}status-pending{% endif %}">
+                        {% if tarefa.concluida %}✅ Concluída{% else %}⏳ Pendente{% endif %}
+                    </span>
+                </div>
+                
+                <div class="task-meta">
+                    <span>📅 {{ tarefa.criada_em|date:'d/m/Y H:i' }}</span>
+                </div>
+
+                <div class="task-actions">
+                    <form action="{% url 'deletar_tarefa' tarefa.pk %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm" 
+                                onclick="return confirm('Tem certeza que deseja deletar esta tarefa?')">
+                            🗑️ Deletar
+                        </button>
+                    </form>
+                    
+                    {% if not tarefa.concluida %}
+                    <form action="{% url 'concluir_tarefa' tarefa.pk %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-success btn-sm">
+                            ✅ Concluir
+                        </button>
+                    </form>
+                    {% else %}
+                    <form action="{% url 'concluir_tarefa' tarefa.pk %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline btn-sm">
+                            ↩️ Reabrir
+                        </button>
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="text-center">
+            <p>🎉 Você não tem tarefas cadastradas!</p>
+            <p class="text-muted">Comece adicionando uma nova tarefa acima.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
 {% endblock %}

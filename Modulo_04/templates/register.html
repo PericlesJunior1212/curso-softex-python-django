@@ -1,13 +1,42 @@
 {% extends 'base.html' %}
-{% block title %}Cadastro{% endblock %}
+{% block title %}Cadastro - TaskFlow{% endblock %}
 {% block content %}
+<div class="animate-in" style="max-width: 500px; margin: 0 auto;">
+    <div class="card">
+        <div class="card-header text-center">
+            <h1 class="page-title">✨ Cadastre-se</h1>
+        </div>
 
-<h2>Cadastre-se</h2>
+        <form method="POST">
+            {% csrf_token %}
+            
+            {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}" class="form-label">
+                    {{ field.label }}
+                </label>
+                {{ field }}
+                {% if field.help_text %}
+                <small class="form-text">{{ field.help_text }}</small>
+                {% endif %}
+                {% for error in field.errors %}
+                <div class="alert alert-error">{{ error }}</div>
+                {% endfor %}
+            </div>
+            {% endfor %}
 
-<form method="POST">
- {% csrf_token %}
- {{ form.as_p }}
- <button type="submit">Criar Conta</button>
-</form>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">
+                🎉 Criar Minha Conta
+            </button>
+        </form>
 
+        <div class="text-center mt-2">
+            <p>🔐 Já tem uma conta? 
+                <a href="{% url 'login' %}" class="btn btn-outline btn-sm">
+                    Fazer Login
+                </a>
+            </p>
+        </div>
+    </div>
+</div>
 {% endblock %}
