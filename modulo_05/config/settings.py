@@ -1,19 +1,10 @@
 from pathlib import Path
 import os
-from dotenv import load_dotenv
-import os
+import environ  # <--- Biblioteca que instalamos
 
-# Carrega variáveis de ambiente do arquivo .env
-load_dotenv()
-
-# Função auxiliar para obter valores de ambiente com padrão
-def env(key, default=None):
-    return os.getenv(key, default)
-
-def env_bool(key, default=False):
-    """Converte variáveis de ambiente para booleano"""
-    value = os.getenv(key, str(default)).lower()
-    return value in ('true', '1', 'yes', 'on')
+# Inicializa o environ
+env = environ.Env()
+environ.Env.read_env() # Lê o arquivo .env
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,7 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env("SECRET_KEY", default='django-insecure-chave-de-aula-12345')
 
 # O mesmo para o Debug
-DEBUG = env_bool("DEBUG", default=True)
+DEBUG = env.bool("DEBUG", default=True)
 
 
 ALLOWED_HOSTS = ["*"]
