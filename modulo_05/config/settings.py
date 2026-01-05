@@ -1,7 +1,7 @@
 from pathlib import Path
 import os
 import environ  # <--- Biblioteca que instalamos
-
+import sys
 # Inicializa o environ
 env = environ.Env()
 environ.Env.read_env() # Lê o arquivo .env
@@ -20,6 +20,8 @@ DEBUG = env.bool("DEBUG", default=True)
 ALLOWED_HOSTS = ["*"]
 
 
+    
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -30,10 +32,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
-     # Third party 
+    # Third party 
     'rest_framework', 
     'rest_framework_simplejwt', 
-     
+    
     # Local apps 
     'core',
 ]
@@ -119,3 +121,9 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+if 'test' in sys.argv:  
+    DATABASES['default'] = {
+    'ENGINE': 'django.db.backends.sqlite3',
+    'NAME': ':memory:', # Banco reside apenas na RAM
+}

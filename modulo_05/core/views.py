@@ -13,8 +13,6 @@ from rest_framework import generics
 
 logger = logging.getLogger(__name__)
 
-git config --global user.name "Seu Nome"
-git config --global user.email "seuemail@example.com"
 class ListaTarefasAPIView(APIView):
 
     permission_classes = [IsAuthenticated]
